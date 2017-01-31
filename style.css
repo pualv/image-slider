@@ -1,0 +1,28 @@
+.slider_wrapper {
+	/*size set in js. */
+	/*hide everything outside box (next image to slide in is positioned outside)*/
+	position: relative;
+	overflow: hidden;
+}
+
+.slider_img {
+	position: absolute; 
+	/*z-index settings needed to ensure smooth changeover when slideshow loops at end*/
+	z-index:1;
+}
+
+.js_prev{
+	z-index: 0;
+}
+
+.js_next {
+	/*make next image visible. next image added in js*/
+	visibility: visible;
+
+	/*position next image outside wrapper so it's not visible*/
+	 -webkit-transform: translate(100%, 0);
+	z-index:2;
+}
+
+
+
