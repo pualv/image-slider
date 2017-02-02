@@ -30,11 +30,9 @@ window.onload = function() {
         // loops from 0 through to num
             var pointer = -1;
             function countIt(){
-                if(pointer > num-2){pointer = -1;}
                 pointer++;
-                  console.log(pointer);
+                if(pointer === num){pointer = 0;}
                 return pointer;
-              
             }
             return {count:countIt}
         } //
