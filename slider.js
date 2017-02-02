@@ -1,6 +1,6 @@
 window.onload = function() {
 
-    (function() { 
+    (function() {
 
         var setup = {
              wrap: 'slider_wrapper', // div containing images
@@ -10,11 +10,10 @@ window.onload = function() {
         setup.translate = 'all ' + setup.slidespeed + 'ms ease-in-out'; // css translation}
 
 
-        images = []; 
+        images = [];
         images = imageData(setup.wrap); //put images inside setup.wrap into an array
 
         wrapperSize(setup.wrap, images[0]); // Make setup.wrap viewport for images. Based on size of first image.
-
 
         var increment = theCounter(images.length); // Set up an instance of theCounter
         var inc = increment.countIt(); // Set up counter for first image
@@ -53,8 +52,11 @@ window.onload = function() {
             // do the animation on current image
             img[current].className = 'slider_img'; // remove js_next class once it's done its job
             img[current].style.visibility = 'visible'; // this could be done in css of course but hardly seems worth having a class for this one thing.
-            img[current].style.webkitTransition = setup.translate; // this here so you can change transition info (time, easing) above instead of in css file
 
+            vendors = ['Webkit', 'Moz', 'ms', 'o', ''];
+            for (v = 0; v < vendors.length; ++v){
+                  img[current].style[vendors[v] + 'Transition'] = setup.translate; // this here so you can change transition info (time, easing) above instead of in css file
+            }
             // reset previous image
             img[prev].style.visibility = 'hidden';
             img[prev].className = 'slider_img js_prev';
@@ -89,10 +91,11 @@ window.onload = function() {
             wrapper.style.width = width + 'px';
         } //wrapperSize
 
-      
-      
+
+      // *** FUNCTIONAL FUNCTION ***
+      // Makes code a bit simpler (arguable - only applies to setup.wrap, could use ID selection instead)
+      // Gets first appearance of class on page.
         function getClass(el){
-        // to get first appearance of class on page. getElements... returns node list
             var el= document.getElementsByClassName(el);
             var el = el[0];
             return el;

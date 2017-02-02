@@ -19,7 +19,12 @@
 	/*make next image visible. next image added in js*/
 	visibility: visible;
 	/*position next image outside wrapper so it's not visible*/
-	 -webkit-transform: translate(100%, 0);
+	 -Webkit-transform: translate(100%, 0);
+	 -Moz-transform: translate(100%, 0);
+	 -ms-transform: translate(100%, 0);
+	 -o-transform: translate(100%, 0);
+	 transform: translate(100%, 0);
+
 	z-index:2;
 }
 
