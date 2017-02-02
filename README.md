@@ -6,13 +6,11 @@ The sort of thing you have at the top of websites. Images slide in from right. S
 It will automatically cycle through all images inside the div '.slider_wrapper'. Nothing else needs doing.
 (Name of image wrapper can be changed in variable set up at top of code.)
 
-The size of the wrapper is taken from the size of the first image. Therefor all images should be the same size.
+The size of the wrapper is taken from the size of the first image. Therefore all images should be the same size.
 
 --- Code stuff ---
 
 The transitions are done using css translate, attaching and removing the appropriate classes as required. 
-
-** Currently this only has the webkit vendor prefix. **
 
 Images are first loaded into an array. 
 
