@@ -1,6 +1,6 @@
 window.onload = function() {
 
-    (function() { // exclude code from global space
+    (function() { 
 
         var setup = {
              wrap: 'slider_wrapper', // div containing images
@@ -9,36 +9,39 @@ window.onload = function() {
         };
         setup.translate = 'all ' + setup.slidespeed + 'ms ease-in-out'; // css translation}
 
-        images = {}; // images stored as objects here. done like this because you can't call other variables etc. in {} notation
 
-        images = imageData(setup.wrap); //calls function that puts contents of wrap into an array
+        images = []; 
+        images = imageData(setup.wrap); //put images inside setup.wrap into an array
 
-        wrapperSize(setup.wrap, images[0]); // this so it cuts off next slider which is outside the wrapper ready to slide in. this could be set in css but then you'd have to know the image size. It would be ideal if this was done automatically in css but the images are position: absolute so the wrapper does not know how big they are. So I have to tell it. It's based on the 1st image size.
+        wrapperSize(setup.wrap, images[0]); // Make setup.wrap viewport for images. Based on size of first image.
 
-        var increment = theCounter(images.length);
 
-        var inc = increment.count();
+        var increment = theCounter(images.length); // Set up an instance of theCounter
+        var inc = increment.countIt(); // Set up counter for first image
+        doIt(images, images.length, inc); // Set initial state of images
 
-        doIt(images, images.length, inc);
 
+        // Increment counter at set interval. Slide in next image.
         setInterval(function(){
-            inc = increment.count();
+            inc = increment.countIt();
             doIt(images, images.length, inc);
         }, setup.slidespeed + setup.slidegap);
 
+        // *** FUNCTIONS ***
+
+        // Loops through 0 to number of images
         function theCounter(num){
-        // loops from 0 through to num
             var pointer = -1;
             function countIt(){
                 pointer++;
                 if(pointer === num){pointer = 0;}
                 return pointer;
             }
-            return {count:countIt}
-        } //
+            return {countIt}
+        } //theCounter
 
+        // Operates the animation
         function doIt(img, num, current){
-        // cycle through image array setting up transitions i= current visible image.
             var next = current + 1;
             var prev = current - 1;
             if (prev  < 0){prev = num - 1}
@@ -57,19 +60,19 @@ window.onload = function() {
             img[prev].className = 'slider_img js_prev';
         } // doIt
 
-        // setup functions //////////
+
+        // *** SET UP FUNCTIONS ***
+
+        // put images inside setup.wrap into an array
         function imageData(parent){
-            console.log(parent);
-        // get children of parent element and put in array
             var parent = getClass(parent);
             var children = parent.childNodes;
             var image_data = [];
             for (var i =0; i <children.length; i++){
                 if (children[i].nodeType == 1){ // checks children are right type before storing otherwise white space will be stored
                     image_data.push(children[i]);
-
-                    // set visibilty for initial set up. seems sensible to do it here instead of going through again elsewhere.
                     if (i != 0){
+                         // Hide all images apart from first. Seems sensible to do it here while cycling though images although it does mean this function does two things.
                         children[i].style.visibility = 'hidden';
                     }
                 }
@@ -77,8 +80,8 @@ window.onload = function() {
             return image_data;
         } // imageData
 
+        // Set wrapper size based on first image size
         function wrapperSize(wrapper, image){
-        // set wrapper size so that everything outside is invisible (because next image is shifted outside to slide back in). Nec. because images are postioned absolute for the animation so wrapper does not know image size
             var wrapper = getClass(wrapper);
             var width = image.clientWidth; // displayed width
             var height = image.clientHeight;
@@ -86,7 +89,8 @@ window.onload = function() {
             wrapper.style.width = width + 'px';
         } //wrapperSize
 
-        // functional function - reduces amount of code ///////
+      
+      
         function getClass(el){
         // to get first appearance of class on page. getElements... returns node list
             var el= document.getElementsByClassName(el);
