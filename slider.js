@@ -7,7 +7,7 @@ window.onload = function() {
              slidespeed: 500, // speed of transition
              slidegap: 500 // gap between transitions
         };
-        setup.translate = 'all ' + setup.slidespeed + 'ms ease-in-out'; // css translation}
+        setup.translate = 'transform ' + setup.slidespeed + 'ms ease-in-out'; // css translation}
 
 
         images = [];
@@ -51,14 +51,14 @@ window.onload = function() {
 
             // do the animation on current image
             img[current].className = 'slider_img'; // remove js_next class once it's done its job
-            img[current].style.visibility = 'visible'; // this could be done in css of course but hardly seems worth having a class for this one thing.
+            img[current].style.opacity = '1'; // this could be done in css of course but hardly seems worth having a class for this one thing.
 
             vendors = ['Webkit', 'Moz', 'ms', 'o', ''];
             for (v = 0; v < vendors.length; ++v){
                   img[current].style[vendors[v] + 'Transition'] = setup.translate; // this here so you can change transition info (time, easing) above instead of in css file
             }
             // reset previous image
-            img[prev].style.visibility = 'hidden';
+            img[prev].style.opacity = 'o';
             img[prev].className = 'slider_img js_prev';
         } // doIt
 
@@ -75,7 +75,7 @@ window.onload = function() {
                     image_data.push(children[i]);
                     if (i != 0){
                          // Hide all images apart from first. Seems sensible to do it here while cycling though images although it does mean this function does two things.
-                        children[i].style.visibility = 'hidden';
+                        children[i].style.opacity = '0';
                     }
                 }
             }

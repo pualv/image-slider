@@ -3,8 +3,7 @@
 	/*hide everything outside box (next image to slide in is positioned outside)*/
 	position: relative;
 	overflow: hidden;
-	max-width: 100%;
-	max-height: 100%;
+	display: inline-block;
 
 }
 .slider_wrapper img:first-child{
@@ -32,7 +31,7 @@
 
 .js_next {
 	/*make next image visible. next image added in js*/
-	visibility: visible;
+	opacity: 1;
 	/*position next image outside wrapper so it's not visible*/
 	 -Webkit-transform: translate(100%, 0);
 	 -Moz-transform: translate(100%, 0);
