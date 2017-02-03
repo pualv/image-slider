@@ -9,22 +9,19 @@ window.onload = function() {
         };
         setup.translate = 'transform ' + setup.slidespeed + 'ms ease-in-out'; // css translation}
 
-
         images = [];
         images = imageData(setup.wrap); //put images inside setup.wrap into an array
-
-        // wrapperSize(setup.wrap, images[0]); // Make setup.wrap viewport for images. Based on size of first image.
 
         var increment = theCounter(images.length); // Set up an instance of theCounter
         var inc = increment.countIt(); // Set up counter for first image
         doIt(images, images.length, inc); // Set initial state of images
-
 
         // Increment counter at set interval. Slide in next image.
         setInterval(function(){
             inc = increment.countIt();
             doIt(images, images.length, inc);
         }, setup.slidespeed + setup.slidegap);
+
 
         // *** FUNCTIONS ***
 
@@ -41,27 +38,31 @@ window.onload = function() {
 
         // Operates the animation
         function doIt(img, num, current){
-            var next = current + 1;
-            var prev = current - 1;
-            if (prev  < 0){prev = num - 1}
+            var next = current + 1; // set up next image to animate
+            var prev = current - 1; // drop image to be slide over down z-index
+            var done = current - 2; // turn off image once not needed
+
             if (next > num - 1){next = 0}
+            if (prev < 0) {prev = num-1}
+            if (done  <= -1){done = num + done}
 
             // cue up next image
             img[next].className = 'slider_img js_next';
 
+            img[done].style.opacity = '0';
+            img[prev].style.zIndex = '0';
+
             // do the animation on current image
             img[current].className = 'slider_img'; // remove js_next class once it's done its job
             img[current].style.opacity = '1'; // this could be done in css of course but hardly seems worth having a class for this one thing.
+            img[current].style.zIndex = '1';
 
             vendors = ['Webkit', 'Moz', 'ms', 'o', ''];
             for (v = 0; v < vendors.length; ++v){
                   img[current].style[vendors[v] + 'Transition'] = setup.translate; // this here so you can change transition info (time, easing) above instead of in css file
             }
             // reset previous image
-            img[prev].style.opacity = 'o';
-            img[prev].className = 'slider_img js_prev';
         } // doIt
-
 
         // *** SET UP FUNCTIONS ***
 
@@ -81,16 +82,6 @@ window.onload = function() {
             }
             return image_data;
         } // imageData
-
-        // Set wrapper size based on first image size
-        function wrapperSize(wrapper, image){
-            var wrapper = getClass(wrapper);
-            var width = image.clientWidth; // displayed width
-            var height = image.clientHeight;
-            wrapper.style.height = height + 'px';
-            wrapper.style.width = width + 'px';
-        } //wrapperSize
-
 
       // *** FUNCTIONAL FUNCTION ***
       // Makes code a bit simpler (arguable - only applies to setup.wrap, could use ID selection instead)

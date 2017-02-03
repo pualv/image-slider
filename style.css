@@ -1,45 +1,31 @@
 .slider_wrapper {
-	/*size set in js. */
 	/*hide everything outside box (next image to slide in is positioned outside)*/
 	position: relative;
 	overflow: hidden;
 	display: inline-block;
-
 }
-.slider_wrapper img:first-child{
-	position: relative;
-	max-width: 100%;
-	max-height: 100%;
 
-	}
+.slider_wrapper img:first-child{
+	/*first image is relative to give slider_wrapper correct height*/
+	position: relative;
+	width: 100%;
+	height: 100%;	
+}
 
 .slider_wrapper img {
 	position: absolute;
 	top: 0; 
 	left:0;
-/*	z-index settings needed to ensure smooth changeover when slideshow loops at end
-*/	z-index:1;
 	max-width: 100%;
 	max-height: 100%;
 }
 
-
-
-.js_prev{
-	z-index: 0;
-}
-
 .js_next {
-	/*make next image visible. next image added in js*/
-	opacity: 1;
-	/*position next image outside wrapper so it's not visible*/
 	 -Webkit-transform: translate(100%, 0);
 	 -Moz-transform: translate(100%, 0);
 	 -ms-transform: translate(100%, 0);
 	 -o-transform: translate(100%, 0);
 	 transform: translate(100%, 0);
-
-	z-index:2;
 }
 
 
