@@ -3,13 +3,28 @@
 	/*hide everything outside box (next image to slide in is positioned outside)*/
 	position: relative;
 	overflow: hidden;
+	max-width: 100%;
+	max-height: 100%;
+
+}
+.slider_wrapper img:first-child{
+	position: relative;
+	max-width: 100%;
+	max-height: 100%;
+
+	}
+
+.slider_wrapper img {
+	position: absolute;
+	top: 0; 
+	left:0;
+/*	z-index settings needed to ensure smooth changeover when slideshow loops at end
+*/	z-index:1;
+	max-width: 100%;
+	max-height: 100%;
 }
 
-.slider_img {
-	position: absolute; 
-	/*z-index settings needed to ensure smooth changeover when slideshow loops at end*/
-	z-index:1;
-}
+
 
 .js_prev{
 	z-index: 0;

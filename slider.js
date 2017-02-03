@@ -13,7 +13,7 @@ window.onload = function() {
         images = [];
         images = imageData(setup.wrap); //put images inside setup.wrap into an array
 
-        wrapperSize(setup.wrap, images[0]); // Make setup.wrap viewport for images. Based on size of first image.
+        // wrapperSize(setup.wrap, images[0]); // Make setup.wrap viewport for images. Based on size of first image.
 
         var increment = theCounter(images.length); // Set up an instance of theCounter
         var inc = increment.countIt(); // Set up counter for first image
